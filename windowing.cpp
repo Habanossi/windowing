@@ -21,9 +21,9 @@ vector<vector<double>> window(string data, int frameLength, int hopSize, string 
 	vector<double> 			dataV = {};
 
 	ifstream inFile;
-	inFile.open("data/list.dat");
+	inFile.open("data/raw.dat");
 	ofstream oFile;
-	oFile.open("data/wlist.dat");
+	oFile.open("data/window.dat");
 
 	double x;
 	while(inFile >> x){
@@ -38,6 +38,27 @@ vector<vector<double>> window(string data, int frameLength, int hopSize, string 
 			windowFunction.push_back(point);
 		}						
 	}
+	else if(windowType == "flattop"){
+		double point;
+		for(double i = 0.5; i < frameLength/2; i++){
+			point = sin(M_PI*i / frameLength);
+			windowFunction.push_back(point);
+		}
+		for(int i = 0; i < frameLength - hopSize; i++){
+			windowFunction.push_back(1);
+		}
+		for(double i = (frameLength/2)-1; i > 0.5; i--){
+			point =	sin(M_PI*i / frameLength);		
+			windowFunction.push_back(point);
+		}
+	}
+
+	/*
+	flatlen = wlen - wstep			length of flat windowarea
+	ramp_win = np.sin(np.pi*	np.arange(0.5, wstep/2)		/wstep)	.reshape(wstep/2,1)		
+	hwin = np.concatenate(	(ramp_win,np.ones(	(flatlen,1)	), np.flip(ramp_win)	)	)
+	return hwin
+	*/
 	else cout << "Windowing function not supported" << endl;
 
 	for(int i = 0; i < numberOfFrames; i++){ 						//for each row

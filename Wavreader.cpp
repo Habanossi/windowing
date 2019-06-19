@@ -33,7 +33,7 @@ int readWav(){
 	FILE* myFile;							//Open wave file in read mode
 	myFile = fopen("Sounds/SX83.wav","rb");
 	ofstream oFile;
-	oFile.open("data/list.dat");
+	oFile.open("data/raw.dat");
 
 	fseek (myFile, 0, SEEK_END);   			// non-portable
     int fileSize = ftell(myFile); 			//Returns the current value of the position indicator of the stream.
