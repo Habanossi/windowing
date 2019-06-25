@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -Wall -g
 FLAGS = -std=c++11 
-LDFLAGS = -L/usr/lib -lboost_program_options -lpython2.7 -lfftw3 -lm -I/usr/include/python2.7
+LDFLAGS = -L/usr/lib -lboost_program_options -lpython2.7 -lfftw3 -lm -I/usr/include/python2.7 -I/home/hermanni/windowing/eigen-eigen-323c052e1731/
 
 main : main.cpp resample.cpp resample.h upfirdn.h
 	${CC} main.cpp resample.cpp  ${CFLAGS} ${LDFLAGS} -o main
